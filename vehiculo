@@ -1,0 +1,141 @@
+class Vehiculo:
+    def __init__(self, tipo_vehiculo, patente_vehiculo, marca_vehiculo, precio_vehiculo, multas_vehiculo, fecha_registro_vehiculo, dueno_vehiculo):
+        self.tipo_vehiculo = tipo_vehiculo
+        self.patente_vehiculo = patente_vehiculo
+        self.marca_vehiculo = marca_vehiculo
+        self.precio_vehiculo = precio_vehiculo
+        self.multas_vehiculo = multas_vehiculo
+        self.fecha_registro_vehiculo = fecha_registro_vehiculo
+        self.dueno_vehiculo = dueno_vehiculo
+
+    def datos_vehiculo(self):
+        print("Tipo del vehiculo:", self.tipo_vehiculo)
+        print("Patente del vehiculo:", self.patente_vehiculo)
+        print("Marca del vehiculo:", self.marca_vehiculo)
+        print("Precio del vehiculo:", self.precio_vehiculo)
+        print("Multas del vehiculo:", self.multas_vehiculo)
+        print("Fecha de registro del vehiculo:", self.fecha_registro_vehiculo)
+        print("Dueño:", self.dueno_vehiculo)
+
+    def grabar_vehiculo():
+      tipo_vehiculo = input("Ingrese el tipo de vehículo: ")
+      patente_vehiculo = input("Ingrese la patente del vehículo: ")
+      marca_vehiculo = input("Ingrese la marca del vehículo: ")
+      precio_vehiculo = float(input("Ingrese el precio del vehículo: "))
+
+
+    def actualizar_marca(self, nueva_marca):
+        self.marca_vehiculo = nueva_marca
+
+    def actualizar_precio(self, nuevo_precio):
+        self.precio_vehiculo = nuevo_precio
+
+    def agregar_multa(self, nueva_multa):
+        self.multas_vehiculo.append(nueva_multa)
+
+    def actualizar_fecha_registro(self, nueva_fecha_registro):
+        self.fecha_registro_vehiculo = nueva_fecha_registro
+
+    def actualizar_dueno(self, nuevo_dueno):
+        self.dueno_vehiculo = nuevo_dueno
+
+    def imprimir_certificados(self):
+        while True:
+            print("Selecciona el certificado que deseas imprimir:")
+            print("1. Certificado de emision de contaminantes")
+            print("2. Certificado de anotaciones vigentes")
+            print("3. Certificado de Multas")
+            print("4. Salir")
+            opcion = input("Ingresa el certificado que deseas imprimir: ")
+
+            if opcion == "1":
+                print("Certificado de emision de contaminantes")
+                print("Nombre del certificado: emision de contaminantes")
+                print("Patente del auto:", self.patente_vehiculo)
+                print("Datos del dueño del vehiculo:", self.dueno_vehiculo)
+                print()
+            elif opcion == "2":
+                print("Certificado de anotaciones vigentes")
+                print("Nombre del certificado: anotaciones vigentes")
+                print("Patente del auto:", self.patente_vehiculo)
+                print("Datos del dueño:", self.dueno_vehiculo)
+                print()
+            elif opcion == "3":
+                print("Certificado de Multas")
+                print("Nombre del certificado: Multas")
+                print("Patente del auto:", self.patente_vehiculo)
+                print("Datos del dueño:", self.dueno_vehiculo)
+                print()
+            elif opcion == "4":
+                break
+            else:
+                print("La opcion es incorrecta. Ingresa una opcion que sea valida por favor")
+
+
+def validar_patente(patente):
+    return len(patente) == 6
+
+    if not (2 <= len(marca_vehiculo) <= 15):
+        print("La marca debe tener entre 2 y 15 caracteres.")
+        return None
+
+    if precio_vehiculo <= 5000000:
+        print("El precio debe ser mayor a $5.000.000.")
+        return None
+
+vehiculos = [
+    Vehiculo("Camioneta", "ABC123", "Toyota", 6000000, [], "2023-01-01", "Julieta Perez"),
+    Vehiculo("Auto", "DEF456", "Ferrari", 7000000, [], "2023-02-02", "Tomas Perez"),
+    Vehiculo("Auto", "GHI789", "Chevrolet",8000000, [], "2023-03-03", "Camila Perez")
+]
+
+print("Vehículos disponibles:")
+for vehiculo in vehiculos:
+    vehiculo.datos_vehiculo()
+
+menu_activo = True
+
+while menu_activo:
+    print("--------Bienvenido a la automotora Auto Seguro----------")
+    print("1. Grabar vehículo")
+    print("2. Buscar vehículo")
+    print("3. Imprimir certificados del vehiculo")
+    print("4. Salir")
+    opcion = input("Selecciona un número: ")
+
+    if opcion == "1":
+        tipo_vehiculo = input("Ingresa el tipo de vehiculo: ")
+        patente_vehiculo = input("Ingresa la patente del vehiculo: ")
+        marca_vehiculo = input("Ingresa la marca del vehiculo: ")
+        precio_vehiculo = float(input("Ingresa el precio del vehiculo: "))
+        multas_vehiculo = []
+        fecha_registro_vehiculo = input("Ingresea la fecha de registro del vehiculo: ")
+        dueno_vehiculo = input("Ingresa el nombre del dueño del vehiculo: ")
+        vehiculo = Vehiculo(tipo_vehiculo, patente_vehiculo, marca_vehiculo, precio_vehiculo, multas_vehiculo,
+                            fecha_registro_vehiculo, dueno_vehiculo)
+        vehiculos.append(vehiculo)
+    elif opcion == "2":
+        patente_buscar = input("Ingresa la patente del vehiculo que buscas: ")
+        vehiculo_encontrado = None
+        for vehiculo in vehiculos:
+            if vehiculo.patente_vehiculo == patente_buscar:
+                vehiculo_encontrado = vehiculo
+                break
+        if vehiculo_encontrado:
+            vehiculo_encontrado.datos_vehiculo()
+        else:
+            print("No se encontro ningun vehiculo con esa patente. Intenta nuevamente")
+    elif opcion == "3":
+        seleccion = input("Selecciona el numero de vehículos para imprimir los certificados: ")
+        seleccion = int(seleccion)
+
+        if seleccion > 0 and seleccion <= len(vehiculos):
+            vehiculo_seleccionado = vehiculos[seleccion - 1]
+            vehiculo_seleccionado.imprimir_certificados()
+        else:
+            print("La opcion seleccionda es invalida. Intenta nuevamente")
+    elif opcion == "4":
+        print("¡Gracias por utilizar nuestro servicio. Que tengas buena tarde!")
+        break
+    else:
+        print("Opcion invalida. Por favor, selecciona una opcion valida.")
