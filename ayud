@@ -1,0 +1,115 @@
+import random
+
+reservas = {
+    997: {
+        'fecha': '10/07/2023',
+        'hora': '10:00',
+        'inicio': 'Parque Central',
+        'fin': 'Jardín Botánico',
+        'mascotas': 3,
+        'nombre': 'Juan Pérez',
+        'precio': 0
+    },
+    998: {
+        'fecha': '11/07/2023',
+        'hora': '15:30',
+        'inicio': 'Plaza Mayor',
+        'fin': 'Parque de la Montaña',
+        'mascotas': 2,
+        'nombre': 'María López',
+        'precio': 0
+    },
+    999: {
+        'fecha': '12/07/2023',
+        'hora': '09:00',
+        'inicio': 'Parque Norte',
+        'fin': 'Parque Sur',
+        'mascotas': 1,
+        'nombre': 'Pedro Gómez',
+        'precio': 0
+    }
+}
+
+def grabar_reserva():
+    fecha = input("Ingrese la fecha del paseo (dd/mm/aaaa): ")
+    hora = input("Ingrese la hora del paseo (hh:mm): ")
+    inicio = input("Ingrese el lugar de inicio: ")
+    fin = input("Ingrese el lugar de fin: ")
+    mascotas = int(input("Ingrese la cantidad de mascotas a pasear: "))
+    nombre = input("Ingrese el nombre de la persona que reserva: ")
+
+    if mascotas < 1 or mascotas > 5:
+        print("El número de mascotas debe estar entre 1 y 5.")
+        return
+
+    num_reserva = max(reservas.keys()) + 1
+    precio = random.randint(3500, 12900)
+
+    reservas[num_reserva] = {
+        'fecha': fecha,
+        'hora': hora,
+        'inicio': inicio,
+        'fin': fin,
+        'mascotas': mascotas,
+        'nombre': nombre,
+        'precio': precio
+    }
+
+    print("Reserva grabada exitosamente. Número de reserva:", num_reserva)
+
+def buscar_reserva():
+    num_reserva = int(input("Ingrese el número de reserva a buscar: "))
+
+    if num_reserva in reservas:
+        reserva = reservas[num_reserva]
+        print("Información de la reserva:")
+        print("Fecha:", reserva['fecha'])
+        print("Hora:", reserva['hora'])
+        print("Inicio:", reserva['inicio'])
+        print("Fin:", reserva['fin'])
+        print("Cantidad de mascotas:", reserva['mascotas'])
+        print("Nombre:", reserva['nombre'])
+        print("Precio:", reserva['precio'])
+    else:
+        print("No se encontró la reserva solicitada.")
+
+def imprimir_boleta():
+    num_reserva = int(input("Ingrese el número de reserva para imprimir la boleta: "))
+
+    if num_reserva in reservas:
+        reserva = reservas[num_reserva]
+        print("Boleta:")
+        print("Fecha:", reserva['fecha'])
+        print("Cantidad de mascotas:", reserva['mascotas'])
+        print("Precio:", reserva['precio'])
+    else:
+        print("No se encontró la reserva solicitada.")
+
+def salir():
+    print("Gracias por utilizar el programa. ¡Hasta luego!")
+
+def mostrar_menu():
+    print("----- Te Paseo - Registro de Reservas -----")
+    print("1. Grabar reserva")
+    print("2. Buscar reserva")
+    print("3. Imprimir boleta")
+    print("4. Salir")
+
+def main():
+    while True:
+        mostrar_menu()
+        opcion = int(input("Ingrese la opción deseada: "))
+
+        if opcion == 1:
+            grabar_reserva()
+        elif opcion == 2:
+            buscar_reserva()
+        elif opcion == 3:
+            imprimir_boleta()
+        elif opcion == 4:
+            salir()
+            break
+        else:
+            print("Opción inválida. Por favor, ingrese una opción válida.")
+
+main()
