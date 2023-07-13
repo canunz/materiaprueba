@@ -1,0 +1,99 @@
+import random
+
+registros = []
+
+def validar_rut(rut):
+    rut = rut.replace(".", "")
+    rut = rut.replace("-", "")
+
+    if not rut.isdigit() or len(rut) != 9:
+        return False
+
+    return True
+
+def grabar_persona():
+    rut = input("Ingrese el RUT (sin puntos ni guiones): ")
+    if not validar_rut(rut):
+        print("RUT inválido.")
+        return
+
+    nombre = input("Ingrese el nombre: ")
+    apellido_paterno = input("Ingrese el apellido paterno: ")
+    edad = int(input("Ingrese la edad: "))
+    fecha_afiliacion = input("Ingrese la fecha de afiliación: ")
+
+    persona = {
+        "RUT": rut,
+        "Nombre": nombre,
+        "Apellido Paterno": apellido_paterno,
+        "Edad": edad,
+        "Fecha de Afiliación": fecha_afiliacion
+    }
+
+    registros.append(persona)
+    print("Persona registrada exitosamente.")
+
+
+def buscar_persona():
+    rut_buscar = input("Ingrese el RUT de la persona a buscar: ")
+    encontrado = False
+
+    for persona in registros:
+        if persona["RUT"] == rut_buscar:
+            print("Información de la persona:")
+            print("RUT:", persona["RUT"])
+            print("Nombre:", persona["Nombre"])
+            print("Apellido Paterno:", persona["Apellido Paterno"])
+            print("Edad:", persona["Edad"])
+            print("Fecha de Afiliación:", persona["Fecha de Afiliación"])
+            encontrado = True
+            break
+
+    if not encontrado:
+        print("No se encontró ninguna persona con ese RUT.")
+
+
+def imprimir_certificados():
+    if len(registros) == 0:
+        print("No hay personas registradas.")
+        return
+
+    for persona in registros:
+        certificado = random.randint(1000, 1500)
+        print("Nombre del certificado:", certificado)
+        print("Nombre del afiliado:", persona["Nombre"])
+        print("RUT:", persona["RUT"])
+        print("Apellido Paterno:", persona["Apellido Paterno"])
+        print("Edad:", persona["Edad"])
+        print("Fecha de Afiliación:", persona["Fecha de Afiliación"])
+        print()
+
+
+
+def mostrar_menu():
+    print("Bienvenido(a) a Isapre Vida y Salud")
+    print("1. Grabar")
+    print("2. Buscar")
+    print("3. Imprimir certificados")
+    print("4. Salir")
+
+
+def ejecutar_programa():
+    while True:
+        mostrar_menu()
+        opcion = input("Ingrese una opción: ")
+
+        if opcion == "1":
+            grabar_persona()
+        elif opcion == "2":
+            buscar_persona()
+        elif opcion == "3":
+            imprimir_certificados()
+        elif opcion == "4":
+            print("Gracias por utilizar el programa.")
+            break
+        else:
+            print("Opción inválida. Por favor, ingrese una opción válida.")
+
+
+ejecutar_programa()
