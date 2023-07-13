@@ -1,0 +1,58 @@
+import os
+
+# Diccionario que almacena los asientos disponibles
+asientos_disponibles = {
+    '1': 'Disponible',
+    '2': 'Disponible',
+    '3': 'Disponible',
+    '4': 'Disponible',
+    '5': 'Disponible'
+}
+
+# Función para mostrar los asientos disponibles
+def mostrar_asientos():
+    print("Asientos disponibles:")
+    for asiento, estado in asientos_disponibles.items():
+        print(f"Asiento {asiento}: {estado}")
+    print()
+
+# Función para comprar un boleto
+def comprar_boleto():
+    mostrar_asientos()
+    asiento_elegido = input("Ingrese el número del asiento que desea reservar: ")
+    if asiento_elegido in asientos_disponibles:
+        if asientos_disponibles[asiento_elegido] == 'Disponible':
+            nombre_pasajero = input("Ingrese el nombre del pasajero: ")
+            asientos_disponibles[asiento_elegido] = nombre_pasajero
+            print(f"\n¡El asiento {asiento_elegido} ha sido reservado para {nombre_pasajero}!\n")
+        else:
+            print("\nLo siento, ese asiento ya está ocupado.\n")
+    else:
+        print("\nAsiento inválido.\n")
+
+# Función para mostrar el menú
+def mostrar_menu():
+    print("===== MENÚ =====")
+    print("1. Mostrar asientos disponibles")
+    print("2. Comprar boleto")
+    print("3. Salir")
+    print()
+
+# Loop principal
+while True:
+    mostrar_menu()
+    opcion = input("Seleccione una opción: ")
+    print()
+
+    if opcion == '1':
+        mostrar_asientos()
+    elif opcion == '2':
+        comprar_boleto()
+    elif opcion == '3':
+        print("¡Gracias por usar nuestro servicio de compra de boletos!")
+        break
+    else:
+        print("Opción inválida.\n")
+
+    input("Presione Enter para continuar...")
+    print("\n" * 50)  # Imprime múltiples líneas en blanco para simular limpiar la pantalla
