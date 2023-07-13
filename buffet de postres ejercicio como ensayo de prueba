@@ -1,0 +1,63 @@
+def mostrar_menu():
+    print("===== Menú =====")
+    print("1. Calcular costo del evento")
+    print("2. Salir")
+    print("================")
+
+def calcular_costo_evento():
+    # Solicitar información al usuario
+    cantidad_asistentes = int(input("Ingrese la cantidad de asistentes: "))
+    opciones_menu = int(input("Ingrese el número de opciones de menú (1 o 2): "))
+    agregar_postres = input("¿Desea agregar un buffet de postres? (S/N): ")
+
+    # Definir precios y tarifas
+    precios = {
+        "Hasta 50": {"Precio un menú": 1000000, "Precio dos opciones de menú": 1500000},
+        "Hasta 100": {"Precio un menú": 1800000, "Precio dos opciones de menú": 2300000},
+        "Hasta 200": {"Precio un menú": 3500000, "Precio dos opciones de menú": 4000000},
+        "Hasta 300": {"Precio un menú": 4100000, "Precio dos opciones de menú": 4600000}
+    }
+    precio_postre = 10000
+
+    # Obtener precios según la cantidad de asistentes
+    if cantidad_asistentes <= 50:
+        tarifa = "Hasta 50"
+    elif cantidad_asistentes <= 100:
+        tarifa = "Hasta 100"
+    elif cantidad_asistentes <= 200:
+        tarifa = "Hasta 200"
+    else:
+        tarifa = "Hasta 300"
+
+    # Calcular costo total del evento
+    costo_menu_una_opcion = precios[tarifa]["Precio un menú"]
+    costo_menu_dos_opciones = precios[tarifa]["Precio dos opciones de menú"]
+    costo_total = costo_menu_una_opcion if opciones_menu == 1 else costo_menu_dos_opciones
+
+    if agregar_postres.upper() == "S":
+        costo_total += cantidad_asistentes * precio_postre
+
+    # Mostrar información de resultado por pantalla
+    print("Eventos 'Food and Dance'")
+    print("Hasta", cantidad_asistentes, "personas")
+    print("Precio un menú:", costo_menu_una_opcion)
+    print("Precio dos opciones de menú:", costo_menu_dos_opciones)
+    if agregar_postres.upper() == "S":
+        print("Buffet de Postres:", cantidad_asistentes * precio_postre)
+    else:
+        print("Sin buffet de Postres")
+    print("Total:", costo_total)
+    print("Gracias por preferirnos.")
+
+# Programa principal
+while True:
+    mostrar_menu()
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "1":
+        calcular_costo_evento()
+    elif opcion == "2":
+        print("¡Hasta luego!")
+        break
+    else:
+        print("Opción inválida. Por favor, seleccione una opción válida.")
