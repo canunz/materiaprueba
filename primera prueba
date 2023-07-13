@@ -1,0 +1,51 @@
+while True:
+    menu_activo = True
+    monto = float(input("Ingrese el monto de la compra/venta: "))
+
+    while menu_activo:
+        print("------ Lé Bank ------")
+        print("1. Tarjeta de crédito")
+        print("2. Tarjeta de débito")
+        opcion = int(input("Ingrese la opción de pago: "))
+
+        if opcion == 1:
+            valor_pagar = monto
+            tarjeta = input("Ingrese el número de tarjeta: ")
+            clave = input("Ingrese la clave de 4 dígitos: ")
+            print("Valor a pagar: ", valor_pagar)
+            print("Información de la tarjeta de crédito:")
+            # Aquí puedes solicitar y mostrar la información adicional de la tarjeta de crédito
+            menu_activo = False
+        elif opcion == 2:
+            valor_pagar = monto
+            tarjeta = input("Ingrese el número de tarjeta: ")
+            clave = input("Ingrese la clave de 4 dígitos: ")
+            print("Valor a pagar: ", valor_pagar)
+            menu_activo = False
+        else:
+            print("Opción inválida. Por favor, ingrese una opción válida.")
+
+    if opcion == 1:
+        cuotas = int(input("Ingrese el número de cuotas (3-6): "))
+        if cuotas < 3 or cuotas > 6:
+            print("Error: número de cuotas inválido.")
+        else:
+            valor_cuota = valor_pagar / cuotas
+            valor_cuota += valor_cuota * 0.02  # 2% de interés adicional
+            print("Cantidad de cuotas:", cuotas)
+            print("Valor a pagar por cada cuota:", valor_cuota)
+            comprobante = input("¿Desea imprimir el comprobante? (S/N): ")
+            if comprobante == "S":
+                print("Imprimiendo comprobante...")
+            else:
+                print("Transacción realizada con éxito.")
+    elif opcion == 2:
+        comprobante = input("¿Desea imprimir el comprobante? (S/N): ")
+        if comprobante == "S":
+            print("Imprimiendo comprobante...")
+        else:
+            print("Transacción realizada con éxito.")
+
+    continuar = input("¿Desea realizar otra transacción? (S/N): ")
+    if continuar == "N":
+        break
